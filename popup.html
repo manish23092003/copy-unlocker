@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copy Unlocker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Copy Unlocker</h1>
+    </header>
+    <main>
+      <div id="status-container">
+        <p id="status-text">Loading...</p>
+      </div>
+      <div class="info">
+        <p>Current site: <span id="hostname">...</span></p>
+        <p class="description">Restores normal text selection and copying when a webpage blocks it.</p>
+      </div>
+      <button id="toggle-btn" disabled>Loading...</button>
+      <div id="error-message" class="hidden"></div>
+    </main>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+*.zip
+*.crx
+*.pem
+
+# Temp files
+*.tmp
+*.log
