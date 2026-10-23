@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Copy Unlocker",
-  "version": "1.0.0",
-  "description": "Restores normal text selection and copying when a webpage intentionally blocks it.",
+  "version": "1.1.0",
+  "description": "Restores normal text selection and copying, and extracts visible text from images and screen regions via local OCR.",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -21,7 +21,22 @@
   "permissions": [
     "storage",
     "activeTab",
-    "tabs"
+    "tabs",
+    "contextMenus",
+    "offscreen",
+    "scripting"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "lib/*",
+        "lib/tessdata/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
   ],
   "content_scripts": [
     {
@@ -41,6 +56,13 @@
         "mac": "Alt+Shift+C"
       },
       "description": "Toggle Copy Unlocker for the current tab"
+    },
+    "extract-screen-ocr": {
+      "suggested_key": {
+        "default": "Alt+Shift+V",
+        "mac": "Alt+Shift+V"
+      },
+      "description": "Extract text from screen region with Copy Unlocker"
     }
   }
 }

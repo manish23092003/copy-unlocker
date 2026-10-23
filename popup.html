@@ -9,18 +9,89 @@
 <body>
   <div class="container">
     <header>
-      <h1>Copy Unlocker</h1>
+      <div class="logo-wrap">
+        <svg class="header-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+        </svg>
+        <h1>Copy Unlocker</h1>
+      </div>
+      <span class="version-tag">v1.1</span>
     </header>
+
     <main>
-      <div id="status-container">
-        <p id="status-text">Loading...</p>
-      </div>
-      <div class="info">
-        <p>Current site: <span id="hostname">...</span></p>
-        <p class="description">Restores normal text selection and copying when a webpage blocks it.</p>
-      </div>
-      <button id="toggle-btn" disabled>Loading...</button>
-      <div id="error-message" class="hidden"></div>
+      <!-- Section 1: Copy-unlocking card -->
+      <section class="section-card copy-card">
+        <div class="status-row">
+          <div class="status-left">
+            <span class="status-indicator" id="status-indicator"></span>
+            <span class="status-text" id="status-text">Checking status...</span>
+          </div>
+        </div>
+        
+        <div class="site-info-row">
+          <span class="site-label">Site:</span>
+          <span id="hostname" class="site-host" title="Current website">...</span>
+        </div>
+
+        <button id="toggle-btn" class="toggle-btn" disabled>Loading...</button>
+        <div id="error-message" class="hidden error-box"></div>
+      </section>
+
+      <!-- Section 2: OCR card -->
+      <section class="section-card ocr-card">
+        <div class="ocr-header">
+          <h2>Extract Text with OCR</h2>
+          <span class="privacy-badge" title="All recognition runs 100% locally on your machine">Private & Offline</span>
+        </div>
+
+        <div class="ocr-actions">
+          <button id="btn-screen-ocr" class="ocr-action-btn" title="Select a visible region on screen to extract text (Alt+Shift+V)">
+            <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 4h3v2H5v2H3V5a1 1 0 0 1 1-1zm16 0a1 1 0 0 1 1 1v3h-2V6h-2V4h3zM3 15h2v2h2v2H4a1 1 0 0 1-1-1v-3zm18 0v3a1 1 0 0 1-1 1h-3v-2h2v-2h2zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm-1 3V9h2v2h2v2h-2v2h-2v-2H9v-2h2z"/>
+            </svg>
+            <span class="btn-label">Capture Screen Region</span>
+            <span class="btn-shortcut">Alt+Shift+V</span>
+          </button>
+
+          <button id="btn-image-ocr" class="ocr-action-btn" title="Choose an image file from your device">
+            <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+            </svg>
+            <span class="btn-label">Extract from Image File</span>
+          </button>
+          <input type="file" id="popup-file-input" accept="image/png,image/jpeg,image/webp,image/bmp" class="hidden">
+        </div>
+
+        <p class="ocr-hint">Or right-click an image on a webpage to extract its text.</p>
+
+        <div id="ocr-error" class="hidden error-box"></div>
+
+        <!-- Popup Local OCR Workspace -->
+        <div id="popup-ocr-workspace" class="hidden">
+          <div class="workspace-header">
+            <span class="workspace-title">Extracted Text</span>
+            <button id="btn-close-workspace" class="small-btn-close" title="Close result">&times;</button>
+          </div>
+
+          <div id="popup-progress-box" class="progress-box hidden">
+            <div class="progress-info">
+              <span id="popup-progress-status">Processing...</span>
+              <span id="popup-progress-pct">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div id="popup-progress-bar-fill" class="progress-bar-fill"></div>
+            </div>
+          </div>
+
+          <textarea id="popup-ocr-text" placeholder="Extracted text will appear here..."></textarea>
+
+          <div class="workspace-footer">
+            <button id="popup-btn-copy" class="btn-mini btn-mini-primary" title="Copy complete text to clipboard">Copy Text</button>
+            <button id="popup-btn-select-all" class="btn-mini" title="Select all text">Select All</button>
+            <button id="popup-btn-clear" class="btn-mini" title="Clear text">Clear</button>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
   <script src="popup.js"></script>

@@ -26,3 +26,8 @@ build/
 # Temp files
 *.tmp
 *.log
+
+# Environment & Secrets
+.env
+.env.*
+*.local
